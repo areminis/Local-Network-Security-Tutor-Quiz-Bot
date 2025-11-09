@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>🧩 Network Security Quiz</h3>
+
+<!-- Step 1: Quiz Configuration -->
+{% if not questions and not results %}
+<form method="POST" class="mb-3">
+  <div class="row mb-3">
+    <div class="col-md-3">
+      <label class="form-label">Quiz Type</label>
+      <select name="mode" class="form-select" required>
+        <option value="mixed">Mixed (Recommended)</option>
+        <option value="topic">Specific Topic</option>
+        <option value="random">Random</option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">Topic (optional)</label>
+      <input type="text" name="topic" class="form-control" placeholder="e.g., cryptography" />
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Number of Questions</label>
+      <input type="number" name="num_questions" class="form-control" value="6" min="3" max="15" required />
+    </div>
+
+    <div class="col-md-2 d-flex align-items-end">
+      <button class="btn btn-primary w-100">Generate Quiz</button>
+    </div>
+  </div>
+</form>
+{% endif %}
+
+
+<!-- Step 2: Display Generated Questions -->
+{% if questions %}
+<form method="POST">
+  {% for q in questions %}
+    {% set i = loop.index %}
+    <div class="card mb-3 p-3 shadow-sm">
+      <h5>Q{{ i }}:</h5>
+      <p>{{ q["question"] }}</p>
+
+      {% if q["type"] == "MCQ" %}
+        {% for opt in q["options"] %}
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="answer_{{ i }}" value="{{ opt }}" required>
+          <label class="form-check-label">{{ opt }}</label>
+        </div>
+        {% endfor %}
+
+      {% elif q["type"] == "TrueFalse" %}
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="answer_{{ i }}" value="True" required> True
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="answer_{{ i }}" value="False" required> False
+        </div>
+
+      <!--{% elif q["type"] == "FillBlank" %}
+        <input type="text" class="form-control" name="answer_{{ i }}" placeholder="Type your answer..." required />-->
+
+      {% elif q["type"] == "OpenEnded" %}
+        <textarea class="form-control" name="answer_{{ i }}" rows="3" placeholder="Write your answer here..." required></textarea>
+      {% endif %}
+
+      <!-- Hidden fields for grading -->
+      <input type="hidden" name="correct_{{ i }}" value="{{ q['answer'] }}">
+      <input type="hidden" name="question_text_{{ i }}" value="{{ q['question'] }}">
+      <input type="hidden" name="context_{{ i }}" value="{{ q['explanation'] }}">
+      <p class="text-muted mt-2"><strong>📚 Source:</strong> {{ q['source'] }}</p>
+    </div>
+  {% endfor %}
+
+  <input type="hidden" name="num_questions" value="{{ questions|length }}">
+  <button class="btn btn-success mt-3">Submit Quiz</button>
+</form>
+{% endif %}
+
+
+<!-- Step 3: Display Grading Results -->
+{% if results %}
+<div class="card p-3 shadow-sm">
+  <h4>📊 Results</h4>
+
+  {% for r in results %}
+  <div class="mb-3">
+    <p><strong>Q{{ r[0] }}:</strong> {{ r[4] }}</p>
+    <p><strong>Your Answer:</strong> {{ r[1] }}</p>
+    <p><strong>Correct Answer:</strong> {{ r[2] }}</p>
+    <p>{{ r[3] }}</p>
+  </div>
+  <hr>
+  {% endfor %}
+
+  <h5 class="mt-2">Final Score: {{ score }}/{{ results|length }}</h5>
+  <a href="/quiz" class="btn btn-secondary mt-3">Take Another Quiz</a>
+</div>
+{% endif %}
+
+{% endblock %}

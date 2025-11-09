@@ -1,0 +1,34 @@
+Lecture 13 – Diffie–Hellman Key Exchange (DETAILED + ELABORATED)
+
+Overview:
+DH is a method for two parties to establish a shared secret over an insecure channel.
+
+
+Process:
+Public parameters: prime p, base g
+
+Steps:
+1) Alice chooses random a → A = g^a mod p
+2) Bob chooses random b → B = g^b mod p
+3) Exchange A, B
+4) Shared secret:
+   Alice computes S = B^a mod p
+   Bob computes S = A^b mod p
+
+Both arrive at same S.
+
+
+Security:
+• Based on discrete logarithm problem (DLP)
+• Hard to compute a or b from A or B
+
+Vulnerability:
+• Man-In-The-Middle if no authentication
+Solution:
+• DH + signatures
+• DH inside TLS with certificates
+
+
+Variants:
+• Ephemeral DH (DHE) → Forward secrecy
+• ECDH → Elliptic curve variant, smaller keys

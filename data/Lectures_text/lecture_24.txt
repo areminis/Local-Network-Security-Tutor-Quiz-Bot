@@ -1,0 +1,39 @@
+Lecture 24 – Malware & Endpoint Security (DETAILED + ELABORATED)
+
+Overview:
+Malware is software designed to disrupt, damage, or gain unauthorized access to systems.
+
+
+Types of Malware:
+1) Virus – Infects files via replication
+2) Worm – Self-replicating over networks
+3) Trojan – Disguised as legitimate software
+4) Ransomware – Encrypts files to demand ransom
+5) Spyware – Collects sensitive data
+6) Rootkits – Hide attacker presence
+
+Attack Cycle:
+1) Infection
+2) Execution
+3) Persistence
+4) Command + Control
+
+Delivery Methods:
+• Email attachments
+• Drive-by downloads
+• USB / removable media
+• Social engineering
+
+Defense Techniques:
+• Antivirus
+• Endpoint monitoring
+• Sandboxing
+• Patch management
+• Least privilege access
+
+Ransomware Case Insight:
+Attackers encrypt sensitive files, demand crypto payment.  
+Defense:
+• Backups
+• Offline storage
+• Email filtering

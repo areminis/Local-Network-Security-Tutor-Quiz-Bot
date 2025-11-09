@@ -1,0 +1,40 @@
+Lecture 6 – Public-Key Cryptography (DETAILED + ELABORATED)
+
+Overview:
+Public-Key (Asymmetric) cryptography uses a key pair: public + private. Enables secure communication without prior key sharing.
+
+
+Why Public-Key?
+Symmetric crypto requires secure distribution of secret key. Hard in large networks.
+
+Public-Key solves this:
+• Public key can be shared openly
+• Private key remains secret
+
+
+Key Characteristics:
+- One key encrypts, the other decrypts
+- Computational asymmetry
+
+
+Applications:
+1) Confidentiality:
+   Encrypt using receiver’s public key.
+   Only private key can decrypt.
+
+2) Authentication / Digital Signature:
+   Sign with private key, verify using public key.
+
+3) Key Exchange:
+   Negotiate symmetric keys (e.g., Diffie-Hellman)
+
+
+Algorithms:
+• RSA – Based on integer factoring
+• DH – Based on discrete logs
+• ECC – Uses elliptic curves for smaller key sizes
+
+Limitations:
+• Slower than symmetric crypto
+• Larger keys needed
+• Often used only to exchange symmetric keys

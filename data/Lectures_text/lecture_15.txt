@@ -1,0 +1,26 @@
+Lecture 15 – Cryptographic Hash Algorithms (DETAILED + ELABORATED)
+
+Overview:
+Hash functions produce fixed-size output from arbitrary input.
+
+
+Security Properties:
+• Preimage resistance
+• Second-preimage resistance
+• Collision resistance
+
+
+Popular Hash Functions:
+• SHA-256 → widely used
+• SHA-3 → sponge construction
+• MD5 → broken
+• SHA-1 → collisions discovered
+
+Merkle–Damgård Construction:
+Builds hash iteratively from message blocks
+- Vulnerable to length-extension (unless used with HMAC)
+
+
+Sponge Construction (SHA-3):
+Absorbing + squeezing phases
+More flexible + secure

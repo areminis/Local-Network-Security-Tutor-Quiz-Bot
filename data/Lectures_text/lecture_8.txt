@@ -1,0 +1,32 @@
+Lecture 8 – Digital Signatures (DETAILED + ELABORATED)
+
+Overview:
+Digital signatures provide authentication, integrity, and non-repudiation. They prove message came from sender and was not altered.
+
+
+Process:
+1) Compute message digest H(M)
+2) Sign using private key:
+   S = (H(M))^d mod n
+3) Verification:
+   V = (S^e) mod n
+   If V = H(M), signature valid
+
+
+Why Hash-then-Sign?
+• Faster
+• Avoids signing large data
+• Hardens security
+
+
+Benefits:
+• Integrity
+• Authentication
+• Non-repudiation
+
+
+Applications:
+• Email signatures (PGP)
+• SSL/TLS certificates
+• Software authenticity
+• Blockchain identity

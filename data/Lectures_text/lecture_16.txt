@@ -1,0 +1,29 @@
+Lecture 16 – Hash-Based Message Authentication Code (HMAC) (DETAILED + ELABORATED)
+
+Overview:
+HMAC provides message integrity + authentication using hash + key.
+
+
+Construction:
+inner = H((K ⊕ ipad) || M)
+HMAC = H((K ⊕ opad) || inner)
+
+ipad/opad ensure separation of inner+outer hashing.
+
+
+Security:
+• Inherits security from hash
+• Resistant to extension attacks
+• Requires shared secret → no non-repudiation
+
+
+Keys in HMAC:
+Two blended keys:
+• K1 = K ⊕ ipad
+• K2 = K ⊕ opad
+
+
+Use Cases:
+• TLS
+• Secure API authentication
+• VPN integrity

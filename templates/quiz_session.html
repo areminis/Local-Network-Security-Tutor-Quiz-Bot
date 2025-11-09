@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>🧩 Multi-Question Quiz</h2>
+
+{% if questions %}
+<form method="POST">
+  {% for q, correct, src in questions %}
+  <div class="quiz-card">
+    <p><b>Q{{ loop.index }}:</b> {{ q }}</p>
+    <textarea name="answer_{{ loop.index }}" placeholder="Your answer..." required></textarea>
+    <input type="hidden" name="correct_{{ loop.index }}" value="{{ correct }}">
+    <p><small>📖 Source: {{ src }}</small></p>
+  </div>
+  {% endfor %}
+  <button type="submit">Submit Quiz</button>
+</form>
+{% endif %}
+
+{% if results %}
+<hr>
+<h3>🏁 Results</h3>
+<ul>
+  {% for i, user, correct, result in results %}
+  <li>
+    <b>Q{{ i }}:</b> {{ result }}  
+    <br>💡 Correct: {{ correct }}  
+    <br>🧍‍♂️ Your answer: {{ user }}
+  </li>
+  {% endfor %}
+</ul>
+<h3>Total Score: {{ score }}/{{ results|length }}</h3>
+{% endif %}
+
+{% endblock %}

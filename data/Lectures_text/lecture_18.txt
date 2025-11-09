@@ -1,0 +1,19 @@
+Lecture 18 – Digital Signature Standards & RSA-PSS (DETAILED + ELABORATED)
+
+Overview:
+Digital signature standards define how to securely sign data.
+
+
+RSA Signatures:
+S = (H(M))^d mod n
+Verify: H(M) == S^e mod n
+
+
+PKCS #1 v2.2:
+• Formal standard for RSA signatures + encryption
+• Defines padding (RSA-PSS, OAEP)
+
+RSA-PSS:
+• Probabilistic signature
+• More secure than deterministic RSA
+• Uses salt + randomness → prevents attacks

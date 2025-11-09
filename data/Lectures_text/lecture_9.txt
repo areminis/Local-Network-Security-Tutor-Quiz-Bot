@@ -1,0 +1,30 @@
+Lecture 9 – Hash Functions (DETAILED + ELABORATED)
+
+Overview:
+Hash functions map data of arbitrary length to a fixed-size output ("digest").
+
+
+Properties:
+1) Deterministic – same input → same output
+2) Fixed-length output
+3) One-way – hard to invert
+4) Preimage resistance – Given h, finding M difficult
+5) Second-preimage resistance – Hard to find M2 ≠ M1 with same hash
+6) Collision resistance – Hard to find ANY M1, M2 producing same output
+7) Avalanche effect – Minor input change → drastically different output
+
+
+Construction:
+- Many use Merkle-Damgård iteration
+
+
+Examples:
+• SHA-256, SHA-3
+• MD5, SHA-1 (both broken)
+
+
+Applications:
+• Password storage
+• Integrity checking
+• Digital signatures
+• MAC / HMAC

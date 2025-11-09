@@ -1,0 +1,15 @@
+Lecture 19 – RSA Signature Correctness + Applications (DETAILED)
+
+Proof:
+Given:
+S = (H(M))^d mod n
+Verify:
+V = (S^e) mod n
+
+Since d×e ≡ 1 mod φ(n), correctness holds:
+(H(M))^(de) mod n = H(M)
+
+Applications:
+• Email security
+• Blockchain protocols
+• Banking systems

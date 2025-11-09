@@ -1,0 +1,37 @@
+Lecture 10 – MAC & HMAC (DETAILED + ELABORATED)
+
+Overview:
+Message Authentication Code (MAC) provides integrity + authenticity using a shared secret key.
+
+
+MAC:
+T = MAC(K, M)
+Receiver recomputes MAC to verify.
+
+Properties:
+• Uses secret key
+• Efficient
+• Secure against forgery
+
+
+HMAC:
+Combines cryptographic hash + secret key.
+
+Construction:
+inner = H((K ⊕ ipad) || M)
+HMAC = H((K ⊕ opad) || inner)
+
+Where:
+ipad = inner pad constant
+opad = outer pad constant
+
+
+Benefits:
+• Resistant to length-extension
+• Standardized (RFC 2104)
+• Works with SHA-256, SHA-3 etc.
+
+Use Cases:
+• TLS
+• API authentication
+• Secure session validation

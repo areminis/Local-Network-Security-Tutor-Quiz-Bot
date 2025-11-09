@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>🧠 AI Tutor</h3>
+<form method="POST" class="mb-3">
+  <div class="input-group">
+    <input type="text" class="form-control" name="question" placeholder="Ask a question..." required />
+    <button class="btn btn-primary" type="submit">Ask</button>
+  </div>
+</form>
+
+{% if question %}
+<div class="card p-3">
+  <strong>Q:</strong> {{ question }}
+  <hr>
+  <pre style="white-space:pre-wrap;">{{ answer }}</pre>
+  <!--<p><strong>📚 Sources:</strong><br>{{ sources }}</p>-->
+</div>
+{% endif %}
+{% endblock %}

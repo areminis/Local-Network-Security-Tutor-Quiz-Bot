@@ -1,0 +1,45 @@
+Lecture 5 – Number Theory & Modular Arithmetic (DETAILED + ELABORATED)
+
+Overview:
+Modern public key cryptography relies heavily on number theory. RSA encryption and digital signatures require modular math and prime computations.
+
+
+Modular Arithmetic:
+- “Clock arithmetic”
+- (a + b) mod n
+- (a × b) mod n
+- (a ^ b) mod n
+
+Efficient algorithms perform exponentiation (square-and-multiply).
+
+GCD & Euclidean Algorithm:
+- gcd(a, b) = largest integer dividing both.
+- Euclid’s algorithm efficiently computes gcd.
+
+Extended Euclid:
+- Finds x, y such that ax + by = gcd(a, b)
+- Used for modular inverse.
+
+
+Prime Numbers:
+- Integer divisible only by 1 and itself.
+- Basis of RSA key security.
+
+Composite Numbers:
+- Easy to multiply primes, hard to factor.
+
+
+Euler’s Totient:
+- ϕ(n) = count of integers < n that are coprime with n.
+- If n = p × q, ϕ(n) = (p−1)(q−1)
+
+
+Modular Inverse:
+For integer a, find x:
+a × x ≡ 1 (mod n)
+
+Exists only if gcd(a, n) = 1.
+
+Application:
+• RSA key generation:
+  d = e⁻¹ mod ϕ(n)

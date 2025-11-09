@@ -1,0 +1,34 @@
+Lecture 7 – RSA Algorithm (DETAILED + ELABORATED)
+
+Overview:
+RSA is the most widely used public-key cryptosystem for secure key exchange + digital signatures. Security depends on difficulty of factoring.
+
+
+Key Generation:
+1) Select two large primes p & q
+2) Compute n = p × q
+3) Compute φ(n) = (p–1)(q–1)
+4) Select public exponent e such that gcd(e, φ(n))=1
+5) Compute private exponent d = e⁻¹ mod φ(n)
+
+Public key: (e, n)
+Private key: (d, n)
+
+
+Encryption:
+C = M^e mod n
+(decryptable only with d)
+
+Decryption:
+M = C^d mod n
+
+
+Correctness:
+e × d ≡ 1 (mod φ(n))
+→ Inverse exists → ensures recovery of M
+
+
+Security Notes:
+• Must use large key sizes (2048+ bits)
+• Vulnerable if p, q chosen weakly
+• Uses padding (OAEP) for security

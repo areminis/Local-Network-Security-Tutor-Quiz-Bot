@@ -1,0 +1,36 @@
+Lecture 14 – Authentication & Access Control (DETAILED + ELABORATED)
+
+Overview:
+Authentication verifies identity; Authorization determines privileges.
+
+
+Authentication Factors:
+1) Something you know (password)
+2) Something you have (token)
+3) Something you are (biometrics)
+
+Stronger authentication uses multi-factor (MFA).
+
+
+Password Authentication:
+Pros: Simple
+Cons: Guessable, stealable
+
+Strength:
+• Minimum length
+• Complexity
+• Rate limiting
+• Salts + hashing
+
+
+Authorization Models:
+1) DAC – Data owner controls access
+2) MAC – Centralized, based on labels
+3) RBAC – Role-based; widely used
+4) ABAC – Policy + attribute based
+
+
+Access Control Concepts:
+• Least privilege
+• Separation of duties
+• Need to know

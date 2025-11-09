@@ -1,0 +1,59 @@
+Lecture 23 – Network Attacks & Defenses (DETAILED + ELABORATED)
+
+Overview:
+Networks are vulnerable to interception, modification, and disruption. Understanding attacks + defenses is critical.
+
+
+Sniffing:
+Intercepting network traffic to read plaintext data.
+Defense: Encryption (TLS), secure Wi-Fi
+
+
+Spoofing:
+Impersonating another device/address.
+Types:
+• IP spoofing
+• DNS spoofing
+• ARP spoofing
+
+Defense:
+• Authentication
+• DNSSEC
+• ARP inspection
+
+
+Man-in-the-Middle (MITM):
+Attacker intercepts + possibly modifies communication.
+Defense:
+• TLS
+• Certificate validation
+
+
+Replay Attacks:
+Attacker reuses captured data/credentials.
+Defense:
+• Nonces
+• Timestamps
+• Session tokens
+
+
+Denial of Service (DoS/DDoS):
+Overwhelm server to cause outage.
+Defense:
+• Rate limiting
+• Traffic filtering
+• CDN
+
+
+Session Hijacking:
+Stealing session credentials/tokens.
+Defense:
+• Strong session handling
+• Regenerate tokens
+• TLS
+
+
+Secure Network Design:
+• Firewalls
+• DMZ
+• Intrusion Detection Systems

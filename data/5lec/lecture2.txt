@@ -1,0 +1,3 @@
+Encryption is the method of converting plaintext data into ciphertext to prevent unauthorized access. 
+Symmetric encryption uses a single key, while asymmetric encryption uses a public and private key pair. 
+SSL and TLS are widely used encryption protocols for securing internet communications.

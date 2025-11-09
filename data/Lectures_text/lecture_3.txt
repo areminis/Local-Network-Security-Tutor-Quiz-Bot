@@ -1,0 +1,49 @@
+Lecture 3 – Block Ciphers & DES (DETAILED + ELABORATED)
+
+Overview:
+Block ciphers encrypt data in fixed-size blocks (e.g., 64, 128 bits) using symmetric keys. Data is transformed through multiple rounds to ensure confusion and diffusion.
+
+
+Feistel Structure:
+A design model for block ciphers.
+
+Process:
+- Block split into Left (L) + Right (R)
+- For each round:
+    L(i+1) = R(i)
+    R(i+1) = L(i) XOR f(R(i), Ki)
+
+Properties:
+• Same structure used for encryption & decryption
+• Round function f() can vary
+
+
+Data Encryption Standard (DES):
+- Block size: 64 bits
+- Key: 56 bits
+- Rounds: 16
+- Developed by IBM, adopted by NIST
+
+S-Boxes:
+• Perform nonlinear substitution.
+• Provide confusion against cryptanalysis.
+
+Key Schedule:
+• Generates 16 round subkeys from main key.
+
+
+Modes of Operation:
+1) ECB (Electronic Codebook)
+- Each block encrypted independently.
+- Patterns preserved → insecure.
+
+2) CBC (Cipher Block Chaining)
+- XOR plaintext with previous ciphertext block.
+- More secure; requires IV.
+
+DES Weaknesses:
+• 56-bit key too small → brute-forced in 1998
+• Not suitable for new systems
+
+Successor:
+• AES replaces DES due to stronger security.

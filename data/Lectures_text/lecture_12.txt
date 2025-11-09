@@ -1,0 +1,44 @@
+Lecture 12 – Key Distribution & Key Management (DETAILED + ELABORATED)
+
+Overview:
+Key management ensures secure generation, storage, distribution, and revocation of cryptographic keys.
+
+
+Symmetric Key Distribution:
+Problem:
+• Shared secret must be exchanged securely
+
+Methods:
+1) Physical exchange
+2) Through trusted third party
+3) Using public-key cryptography
+
+
+Public-Key Distribution:
+• Public keys must be authentic
+• Vulnerable to impersonation → certificates required
+
+
+Key Management Lifecycle:
+1) Key Generation – Secure randomness critical
+2) Key Distribution – Secure channel or PKI
+3) Key Storage – Hardware (HSM) or encrypted software storage
+4) Key Use – Access controlled
+5) Key Update/Rotation
+6) Key Revocation
+7) Key Destruction
+
+
+Key Hierarchy:
+• Master key → derives session keys
+• Session key → temporary; limits damage
+
+
+PKI:
+Public Key Infrastructure binds identities to public keys using certificates.
+
+Components:
+• CA (Certificate Authority)
+• RA (Registration Authority)
+• Certificate Store
+• CRL / OCSP

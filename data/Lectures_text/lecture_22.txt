@@ -1,0 +1,52 @@
+Lecture 22 – SSL/TLS & Certificates (DETAILED + ELABORATED)
+
+Overview:
+TLS (Transport Layer Security) is a protocol ensuring secure communication over networks (e.g., HTTPS). It provides confidentiality, authentication, and integrity.
+
+
+TLS Security Goals:
+1) Confidentiality → via symmetric encryption
+2) Integrity → via MAC / AEAD
+3) Authentication → via digital certificates
+
+TLS Handshake (High Level):
+1) Client Hello: supported versions, ciphers
+2) Server Hello: selected cipher
+3) Server Certificate: verify identity
+4) Key Exchange: derive shared symmetric keys
+5) Finished: secure channel established
+
+
+Certificates:
+Issued by Certificate Authority (CA) to bind a public key to an identity (domain, org).
+
+Components include:
+• Subject (owner)
+• Public key
+• Issuer
+• Signature
+• Validity
+
+
+PKI Components:
+• CA → signs certificates
+• RA → validates requestor
+• CRL / OCSP → revocation status
+
+
+Cipher Suites:
+TLS supports combinations of:
+• Key exchange: RSA / DH / ECDH
+• Encryption: AES, ChaCha20
+• MAC: HMAC-SHA256
+• AEAD: AES-GCM
+
+Forward Secrecy:
+Achieved by ephemeral DH (DHE/ECDHE)
+→ exposure of long-term key does not reveal past session keys
+
+
+TLS Applications:
+• HTTPS
+• VPN
+• Email security (STARTTLS)

@@ -1,0 +1,62 @@
+Lecture 2 – Classical Encryption Techniques (DETAILED + ELABORATED)
+
+Overview:
+Classical cryptography involves ancient and pre-modern techniques that transform text to obscure meaning. While insecure by modern standards, these methods form the foundation of modern cryptographic concepts.
+
+
+Substitution Ciphers:
+Replace each symbol in plaintext with another predetermined symbol.
+
+1. Caesar Cipher:
+- Shifts letters by fixed amount.
+- Example: SHIFT 3 → A→D, B→E
+- Easily broken using brute force or frequency analysis.
+
+2. Monoalphabetic Cipher:
+- Arbitrary substitution mapping.
+- Stronger than Caesar, but still vulnerable to frequency analysis.
+- Language patterns reveal ciphertext mapping over time.
+
+3. Polyalphabetic Cipher (Vigenère):
+- Uses multiple substitution alphabets depending on key word.
+- Example: KEY = "LEMON"
+- More resistant to simple frequency analysis.
+
+Weakness:
+- Repeating key patterns can leak structure.
+- Kasiski test & Friedman test help break it.
+
+Transposition Ciphers:
+Preserve the characters but change their order.
+
+Examples:
+• Rail Fence  
+• Columnar Transposition  
+
+Stronger than pure substitution but still breakable.
+
+Cryptanalysis:
+Art of deciphering encrypted messages without the key.
+
+Common Methods:
+• Frequency analysis
+• Pattern detection
+• Known-plaintext attack
+• Brute force
+
+
+Brute-Force Attacks:
+Try all possible keys.
+- Feasible for classical ciphers due to small keyspace.
+- Impractical for modern systems with huge keyspaces.
+
+
+Limitations:
+• Preserve letter frequencies
+• Easily broken with modern computing
+• Not suitable for secure communications
+
+
+Historical Importance:
+• Foundation for modern symmetric crypto
+• Introduced concepts: substitution/permutation

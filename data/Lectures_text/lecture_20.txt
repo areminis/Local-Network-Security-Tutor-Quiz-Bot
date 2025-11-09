@@ -1,0 +1,32 @@
+Lecture 20 – Authenticated Encryption (DETAILED + ELABORATED)
+
+Overview:
+Authenticated Encryption (AE) provides confidentiality + integrity in a single scheme.
+
+
+Need:
+Ciphertext must not only be confidential but also protected from tampering.
+
+Methods:
+
+1) Encrypt-then-MAC (EtM)
+- Encrypt message, then MAC ciphertext
+- Most secure
+- Used in TLS
+
+2) MAC-then-Encrypt (MtE)
+- MAC message, then encrypt both
+- Weaker; some historical use
+
+3) Encrypt-and-MAC (E&M)
+- Encrypt + MAC independently
+- Must be used carefully
+
+
+AEAD:
+Authenticated Encryption with Associated Data
+Includes additional data (headers) protected for integrity.
+
+Examples:
+• AES-GCM
+• ChaCha20-Poly1305

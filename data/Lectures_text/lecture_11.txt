@@ -1,0 +1,54 @@
+Lecture 11 – Random Numbers & PRNGs (DETAILED + ELABORATED)
+
+Overview:
+Random numbers are required in cryptography for key generation, nonces, salts, IVs, and protocols. Weak randomness leads to compromised systems.
+
+
+True Random Numbers (TRNG):
+Generated from unpredictable physical sources (thermal noise, atmospheric noise).
+Properties:
+• Non-deterministic
+• High entropy
+• Not reproducible
+
+Uses:
+• Security keys
+• Seeding PRNGs
+
+Weakness:
+• Hardware dependency
+• Slower than PRNGs
+
+
+Pseudo-Random Number Generators (PRNGs):
+Algorithmically generate sequences that appear random.
+
+Characteristics:
+• Deterministic: Same seed → same output
+• Fast & efficient
+• Large period before repetition
+
+Quality Requirements:
+• Uniform distribution
+• Unpredictable without seed
+• Large cycle
+
+Uses:
+• Key generation
+• Padding
+• Sampling
+
+Weakness:
+• If seed compromised → entire sequence predictable
+
+
+Cryptographically Secure PRNGs (CSPRNGs):
+Meet stronger unpredictability requirements; output cannot be predicted even if some data is leaked.
+
+Construction:
+• Based on secure hash, block ciphers, or specific algorithms (e.g., Fortuna)
+
+Applications:
+• Key material
+• Nonces
+• Initialization vectors

@@ -1,0 +1,50 @@
+Lecture 21 – Elliptic Curve Cryptography (ECC) (DETAILED + ELABORATED)
+
+Overview:
+Elliptic Curve Cryptography provides public-key security using elliptic curve math over finite fields. ECC offers equivalent security to RSA but with much smaller key sizes, making it faster and more resource-efficient.
+
+
+Elliptic Curves:
+Defined over finite field F_p:
+E: y² = x³ + ax + b (mod p)
+
+Curve operations:
+• Point addition
+• Point doubling
+• Scalar multiplication (kP)
+
+Scalar multiplication is easy; reversing it (finding k) is hard → basis of ECC security.
+
+
+Security Basis:
+Elliptic Curve Discrete Logarithm Problem (ECDLP):  
+Given P and Q = kP, find k → extremely difficult.
+
+This ensures secure key generation and exchange.
+
+ECC Key Pair:
+• Private key: integer k
+• Public key: Q = kP (curve point)
+
+
+Advantages vs RSA:
+• Much smaller keys (256-bit ECC ≈ 3072-bit RSA)
+• Faster computations
+• Lower memory + bandwidth usage
+• Excellent for mobile / IoT
+
+
+ECC Key Exchange:
+Elliptic Curve Diffie-Hellman (ECDH):
+• Both sides compute shared secret S = kA * PB = kB * PA
+
+
+ECC Signatures:
+Elliptic Curve Digital Signature Algorithm (ECDSA):
+• Produces signatures using ECC’s scalar multiplication structure
+
+
+Use Cases:
+• TLS
+• Blockchain (Bitcoin uses ECC/secp256k1)
+• Secure messaging

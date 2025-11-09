@@ -1,0 +1,21 @@
+Lecture 17 – MAC vs Digital Signatures (DETAILED + ELABORATED)
+
+MAC:
+• Uses shared key
+• Provides integrity + authentication
+• No non-repudiation
+
+Digital Signatures:
+• Uses asymmetric keys
+• Provides authenticity + integrity + non-repudiation
+• Signer cannot deny participation
+
+
+Comparison:
+MAC:
+- Fast
+- Key management harder (shared secrets)
+
+Signatures:
+- Slower
+- Easily verifiable using public key

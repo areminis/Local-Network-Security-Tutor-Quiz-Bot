@@ -1,0 +1,46 @@
+Lecture 4 – AES (Advanced Encryption Standard) (DETAILED + ELABORATED)
+
+Overview:
+AES is a symmetric-key block cipher standardized by NIST in 2001 to replace DES.
+
+
+AES Parameters:
+• Block size: 128 bits
+• Key sizes: 128 / 192 / 256 bits
+• # Rounds: 10 / 12 / 14 respectively
+
+
+Internal Structure:
+AES operates at byte level with a 4×4 state array.
+
+1) SubBytes
+- Nonlinear byte substitution using S-box.
+- Provides confusion.
+
+2) ShiftRows
+- Cyclic left shift of rows.
+- Adds diffusion.
+
+3) MixColumns
+- Operates on columns using matrix multiplication in GF(2^8)
+- Further diffusion.
+
+4) AddRoundKey
+- XOR round key with state.
+
+Final Round excludes MixColumns.
+
+
+Key Expansion:
+- Original key expanded into many round keys using Rijndael key schedule.
+
+
+Security:
+• Resistant to differential + linear cryptanalysis
+• No known practical attacks
+• Large keyspace prevents brute force
+
+
+Performance:
+• Fast in software + hardware
+• Used in SSL/TLS, WPA2, VPNs

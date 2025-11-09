@@ -1,0 +1,83 @@
+Lecture 1 – Introduction to Cybersecurity (DETAILED + ELABORATED)
+
+Overview:
+Cybersecurity is the practice of protecting digital systems, networks, programs, and data from cyber attacks, unauthorized access, and damage. With widespread internet connectivity, threats have increased, making security fundamental for governments, organizations, and individuals.
+
+CIA Triad (Core Objectives of Security):
+1. Confidentiality
+   - Ensures only authorized users or systems can access information.
+   - Techniques: Encryption, Access control, Authentication
+   - Examples: 
+      * Using passwords/biometrics to access a system
+      * Encrypting credit card data during online payment
+
+2. Integrity
+   - Maintains data accuracy and consistency over its lifecycle.
+   - Protects against unauthorized modification, insertion, and deletion.
+   - Techniques: Hashing, Digital signatures, Version control
+   - Example: 
+      * If a bank modifies your balance, any unapproved change is detectable.
+
+3. Availability
+   - Ensures information and resources are available when needed.
+   - Maintained through redundancy, failover, DDoS protection, regular maintenance.
+   - Example: 
+      * An e-commerce website must remain available during a holiday sale
+
+
+Key Terms:
+- Vulnerability: A flaw/weakness in a system (e.g., outdated OS, weak password).
+- Threat: A potential cause of an unwanted incident (e.g., hacker, malware).
+- Attack: Deliberate attempt to exploit a vulnerability and cause harm.
+
+Example:
+• Using default passwords → Vulnerability
+• Cybercriminal scanning internet for weak devices → Threat
+• Hacker logging in via default password → Attack
+
+
+Types of Attacks:
+
+Passive Attacks
+- Goal: Obtain information without altering system resources
+- Examples:
+  * Eavesdropping
+  * Traffic analysis
+- Difficult to detect since no data is changed
+- Countermeasures: Encryption
+
+Active Attacks
+- Goal: Modify data, disrupt system operations
+- Examples:
+  * Replay attack
+  * Masquerade
+  * Denial of Service (DoS)
+  * Man-in-the-Middle
+
+
+Security Services:
+- Authentication — Verifies the identity of users/entities
+- Authorization — Grants privileges based on access level
+- Non-repudiation — Prevents sender from denying actions
+- Integrity — Ensures data is unchanged
+- Confidentiality — Prevents unauthorized access
+
+Threat Categories:
+• Malware: Virus, Worms, Trojans
+• Social engineering: Phishing, impersonation
+• Network attacks: MITM, DoS, port scanning
+• Insider threat: Employees stealing data
+
+Modern Examples:
+• Ransomware encrypting hospital data
+• Data breach exposing passwords
+• Phishing emails asking for banking details
+
+
+Why Cybersecurity is Important?
+• Protects sensitive data
+• Supports business continuity
+• Prevents reputation loss & financial damages
+• Required by compliance laws (GDPR, HIPAA, PCI-DSS)
+
+End of Lecture 1

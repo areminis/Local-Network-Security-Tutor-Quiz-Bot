@@ -1,0 +1,57 @@
+Lecture 25 – Security Policies, Governance & Risk Management (DETAILED + ELABORATED)
+
+Overview:
+Effective cybersecurity requires policies, oversight, and risk management beyond just technical controls.
+
+
+Security Policies:
+Formal documents defining acceptable use, security controls, and responsibilities.
+
+Types:
+• Acceptable Use Policy (AUP)
+• Access Control Policy
+• Incident Response Policy
+• Data Protection Policy
+
+
+Risk Management:
+Identify → Analyze → Mitigate risk
+
+Risk Formula:
+Risk = Likelihood × Impact
+
+Responses:
+• Avoid
+• Mitigate
+• Transfer (Insurance)
+• Accept
+
+
+Compliance:
+External requirements and regulations:
+• HIPAA → Health data
+• PCI-DSS → Payment card data
+• GDPR → Privacy rules
+
+Failure impacts:
+• Fines
+• Reputational damage
+
+
+Incident Response:
+Steps:
+1) Preparation
+2) Identification
+3) Containment
+4) Eradication
+5) Recovery
+6) Lessons learned
+
+Security Frameworks:
+• NIST CSF
+• ISO 27001
+Provide structured security practices.
+
+
+Security Culture:
+Employee training + awareness reduces phishing + insider threat
