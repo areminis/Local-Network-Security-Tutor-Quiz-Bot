@@ -1,4 +1,4 @@
-import re, random, subprocess
+import re, random, subprocess, shutil
 from sentence_transformers import SentenceTransformer
 import chromadb
 import os, subprocess
@@ -13,14 +13,41 @@ collection = client.get_or_create_collection("network_security")
 # ----------------------------
 # Helper: Query local Ollama Llama-3.2-3B
 # ----------------------------
-'''def run_llama(prompt, model_name="mistral"):
-#def run_llama(prompt, model_name="llama3.2:3b"):
-    """Runs prompt through local Ollama model (offline)."""
-# Set this path manually based on "where ollama"'''
-OLLAMA_PATH = r"C:\Users\alekh\AppData\Local\Programs\Ollama\ollama.exe"
+# Run a local Ollama model (offline). Prefer the Python 'ollama' package if available,
+# otherwise look for an 'ollama' binary on PATH or via OLLAMA_PATH environment variable.
+OLLAMA_PATH = os.environ.get("OLLAMA_PATH") or shutil.which("ollama")
 
 def run_llama(prompt, model_name="llama3.2:3b"):
-    """Runs prompt through local Ollama model (offline)."""
+    """Runs prompt through local Ollama model (offline).
+
+    Resolution order:
+    1. Use `ollama` Python package if installed.
+    2. Use OLLAMA_PATH env var if set.
+    3. Use `ollama` binary found on PATH (shutil.which).
+    If none are available, returns a helpful error string.
+    """
+    # 1) Try Python package first (preferred for cross-platform)
+    try:
+        import ollama
+        try:
+            # ollama.generate returns a dict-like payload in newer versions; fall back to string handling
+            r = ollama.generate(model=model_name, prompt=prompt)
+            # r may be a dict or object — try to extract text
+            if isinstance(r, dict):
+                return r.get("text") or r.get("output") or str(r)
+            return str(r)
+        except Exception as e:
+            return f"⚠️ Ollama (python package) error: {e}"
+    except Exception:
+        pass
+
+    # 2) Try subprocess with binary
+    if not OLLAMA_PATH:
+        return (
+            "⚠️ Llama model unavailable: no `ollama` python package found and no `ollama` "
+            "binary found on PATH. Install Ollama (https://ollama.com) or set OLLAMA_PATH env var."
+        )
+
     try:
         result = subprocess.run(
             [OLLAMA_PATH, "run", model_name],
@@ -29,11 +56,13 @@ def run_llama(prompt, model_name="llama3.2:3b"):
             stderr=subprocess.PIPE,
             timeout=120
         )
-        
+
         output = result.stdout.decode("utf-8").strip()
         if not output:
             return f"⚠️ No response from Llama model.\nError: {result.stderr.decode('utf-8')}"
         return output
+    except FileNotFoundError:
+        return f"⚠️ Llama model error: binary not found at {OLLAMA_PATH}"
     except Exception as e:
         return f"⚠️ Llama model error: {e}"
 
@@ -51,48 +80,98 @@ def clean_text(text):
 # ----------------------------
 # Tutor main logic
 # ----------------------------
-def ask(question, top_k=3):
-    """Retrieves local context from Chroma and uses Llama-3.2 to generate a clear answer."""
+def ask(question, top_k=3, source_type=None, page=None, include_sources=True):
+    """Retrieves local context from Chroma and uses Llama-3.2 to generate a clear answer.
+
+    Optional filters:
+      - source_type: filter results by metadata 'source_type' (e.g. 'lecture_slide')
+      - page: filter results by metadata 'page' (int or string)
+      - include_sources: when False, do not append a Sources section to the reply
+
+    Behavior:
+    - If matching documents (by source_type/page) are found, they are used as context.
+    - If no matching docs are found, the function falls back to the top general matches and
+      (optionally) includes those as "Fallback sources" so you can see where the answer
+      came from.
+    """
     q_emb = model.encode(question).tolist()
-    results = collection.query(query_embeddings=[q_emb], n_results=top_k)
+    # request a few extra results so filtering doesn't reduce our context too much
+    results = collection.query(query_embeddings=[q_emb], n_results=max(top_k * 3, 10))
 
     if not results["documents"] or not results["documents"][0]:
-        return (
-            "⚠️ No relevant content found in local data. Please ask a course-related question.",
-            "system"
-        )
+        return "⚠️ No relevant content found in local data. Please ask a course-related question."
 
     docs, metas = results["documents"][0], results["metadatas"][0]
-    cleaned = [clean_text(d) for d in docs if len(d.split()) > 8]
-    if not cleaned:
-        return ("⚠️ Retrieved content too short to answer.", "system")
 
-    context = "\n\n".join(cleaned[:3])
+    # Pair and filter by metadata if requested
+    pairs = list(zip(docs, metas))
+    def matches_meta(m):
+        if source_type and m.get("source_type") != source_type:
+            return False
+        if page is not None:
+            # allow numeric or string comparison
+            mp = m.get("page")
+            if mp is None:
+                return False
+            if str(mp) != str(page):
+                return False
+        return True
+
+    matched_pairs = [ (d,m) for (d,m) in pairs if matches_meta(m) and len(str(d).split()) > 8 ]
+
+    used_pairs = matched_pairs
+    used_as_fallback = False
+    if not used_pairs:
+        # No docs matched the requested filters; fall back to top general results
+        used_as_fallback = True
+        used_pairs = [ (d,m) for (d,m) in pairs if len(str(d).split()) > 8 ][:top_k]
+
+    if not used_pairs:
+        return "⚠️ Retrieved content too short to answer."
+
+    context = "\n\n".join([ clean_text(d) for d,m in used_pairs[:top_k] ])
 
     # Build structured prompt for local Llama
+    if source_type or page is not None:
+        filter_note = "Use ONLY the requested source filters (source_type and/or page) when present."
+    else:
+        filter_note = "Use the context below to answer the question."
+
     prompt = f"""
 You are a helpful Network Security Tutor.
-Use ONLY the context below to answer the question in some clear bullet points use only . bullets.
-If formulas appear, include them in simple readable form.
+{filter_note}
+Answer in clear bullet points. If formulas appear, include them in simple readable form.
 Avoid figure numbers, page labels, or unrelated noise.
 
 Context:
-{context[:200]}
+{context[:1000]}
 Question: {question}
 
 Answer:
 """
 
     # Generate answer via local Llama
-    answer = run_llama(prompt)
+    raw = run_llama(prompt)
 
-    # Collect sources
-    srcs = sorted({f"{m.get('source_type','?')} → {m.get('filename','?')}" for m in metas})
-    src_line = "\n".join(srcs)
+    # Remove model-internal arrays/metadata from returned text
+    cleaned_output = re.sub(r"context\s*=\s*\[.*?\]", "", str(raw), flags=re.DOTALL)
+    cleaned_output = re.sub(r"thinking\s*=\s*[^\n]*", "", cleaned_output)
+    cleaned_output = re.sub(r"\n{3,}", "\n\n", cleaned_output.strip())
 
-    # Clean output
-    answer = re.sub(r"\n{3,}", "\n\n", answer.strip())
-    return f"{answer}\n\n📚 Sources:\n{src_line}", src_line
+    # Prepare sources
+    if include_sources:
+        if used_as_fallback:
+            srcs = sorted({f"{m.get('source_type','?')} → {m.get('filename','?')}" for d,m in used_pairs})
+            src_line = "\n".join(srcs)
+            sources_block = f"\n\n📚 Fallback Sources:\n{src_line}"
+        else:
+            srcs = sorted({f"{m.get('source_type','?')} → {m.get('filename','?')}{(' (page '+str(m.get('page'))+')') if m.get('page') is not None else ''}" for d,m in used_pairs})
+            src_line = "\n".join(srcs)
+            sources_block = f"\n\n📚 Sources:\n{src_line}"
+    else:
+        sources_block = ""
+
+    return f"{cleaned_output}{sources_block}"
 
 # 🧩 Quick local test
 if __name__ == "__main__":
@@ -100,6 +179,5 @@ if __name__ == "__main__":
         q = input("\nAsk a question (or type 'exit'): ")
         if q.lower() == "exit":
             break
-        ans, src = ask(q)
+        ans = ask(q)
         print("\n🧠 Answer:\n", ans)
-        #print("\n📚 Sources:\n", src)
