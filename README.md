@@ -528,8 +528,6 @@ For questions or issues, please open a GitHub issue or contact the development t
 
 ---
 
-**Built with ❤️ for Network Security Education**
-
 *Privacy-First • Locally-Powered • AI-Enhanced*
 
 **Docker-Commands**
